@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "597655032235",
+    "project_id": "soilnutrientmonitor",
+    "storage_bucket": "soilnutrientmonitor.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:597655032235:android:39e1eb9285e187600bc2ee",
+        "android_client_info": {
+          "package_name": "com.SoilNutrient.CropPredictor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "597655032235-s441h61m2hb0ct9ube31cguu6c24h2i0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.SoilNutrient.CropPredictor",
+            "certificate_hash": "d30673369bfacb5dc62ed22cd83f4c254c1cba31"
+          }
+        },
+        {
+          "client_id": "597655032235-7fm1r7saburtoscockh12v41r8e3lhph.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAebZzVa495PPjtKHsRMuxbKTARsLViGxs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "597655032235-7fm1r7saburtoscockh12v41r8e3lhph.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
