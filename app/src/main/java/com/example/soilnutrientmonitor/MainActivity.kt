@@ -3,11 +3,15 @@ package com.example.soilnutrientmonitor
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.soilnutrientmonitor.databinding.ActivityMainBinding
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -34,11 +38,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         googleSignInBtn = findViewById(R.id.googleSignInBtn)
+        var responsetxt = findViewById<TextView>(R.id.response)
+        responsetxt.text = "hi"
 
         val googleSignInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail().build()
-
         googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions)
         firebaseAuth = FirebaseAuth.getInstance()
 
@@ -53,8 +58,12 @@ class MainActivity : AppCompatActivity() {
     private fun checkUser(){
         val firebaseUser = firebaseAuth.currentUser
         if(firebaseUser != null){
-            startActivity(Intent(this@MainActivity, PredictActivity::class.java))
+            startActivity(Intent(this@MainActivity, HomeActivity::class.java))
             finish()
+        }
+        else {
+            Log.d(TAG, "user is null, intent will not run")
+            return
         }
     }
 
