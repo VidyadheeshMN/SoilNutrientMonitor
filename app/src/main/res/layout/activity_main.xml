@@ -14,17 +14,10 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:layout_centerHorizontal="true"
-        android:text="Sign In to App from Google" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/response"
-        android:layout_below="@+id/heading"
-        android:gravity="center"
+        android:textSize="26dp"
         android:textStyle="bold"
-        android:textSize="20dp"
-        android:layout_centerHorizontal="true" />
+        android:textColor="@color/white"
+        android:text="Sign In to Soil Nutrient Monitor with Google" />
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/googleSignInBtn"

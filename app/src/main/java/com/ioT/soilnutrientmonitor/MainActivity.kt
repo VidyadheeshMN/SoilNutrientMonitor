@@ -1,17 +1,11 @@
-package com.example.soilnutrientmonitor
+package com.ioT.soilnutrientmonitor
 
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
-import android.view.MenuItem
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.android.volley.Request
-import com.android.volley.Response
-import com.android.volley.toolbox.StringRequest
-import com.android.volley.toolbox.Volley
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -38,8 +32,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         googleSignInBtn = findViewById(R.id.googleSignInBtn)
-        var responsetxt = findViewById<TextView>(R.id.response)
-        responsetxt.text = "hi"
 
         val googleSignInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
@@ -107,7 +99,7 @@ class MainActivity : AppCompatActivity() {
                     Log.d(TAG, "existing user with \n$email address")
                     Toast.makeText(this@MainActivity, "logged in with existing email ${email}", Toast.LENGTH_SHORT).show()
                 }
-
+                checkUser()
             }
             .addOnFailureListener{ e->
             Log.d(TAG, "firebaseAuthWithGoogleAccount: login failed due to ${e.message}")

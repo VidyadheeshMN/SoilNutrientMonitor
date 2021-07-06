@@ -1,7 +1,8 @@
-package com.example.soilnutrientmonitor.fragments
+package com.ioT.soilnutrientmonitor.fragments
 
-import android.graphics.Color
 import android.os.Bundle
+import android.text.Editable
+import android.text.method.ScrollingMovementMethod
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -11,13 +12,14 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
 import com.chaquo.python.Python
-import com.chaquo.python.android.AndroidPlatform
-import com.example.soilnutrientmonitor.R
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.firebase.auth.FirebaseAuth
 import com.google.gson.GsonBuilder
 import com.google.gson.annotations.SerializedName
+import com.ioT.soilnutrientmonitor.R
 
 
 class PredictFragment : Fragment() {
@@ -26,7 +28,10 @@ class PredictFragment : Fragment() {
     var phValue:Float = (-1).toFloat(); var ecValue:Float = (-1).toFloat(); var sValue:Float = (-1).toFloat()
     var cuValue:Float = (-1).toFloat(); var feValue:Float = (-1).toFloat(); var mnValue:Float = (-1).toFloat()
     var znValue:Float = (-1).toFloat(); var bValue:Float = (-1).toFloat(); lateinit var showResponse: TextView;
+    var obtainedPhValue: Float = (-1).toFloat()
+    var obtainedECValue: Float = (-1).toFloat()
     lateinit var showPredictedCrop: TextView
+    lateinit var predictData: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,10 +44,76 @@ class PredictFragment : Fragment() {
         // Inflate the layout for this fragment
         val v:View = inflater.inflate(R.layout.fragment_predict, container, false)
         val pred: Button = v.findViewById(R.id.btn_predCrop)
-        pred.setBackgroundColor(Color.BLUE)
         pred.setOnClickListener{predict(v)}
+
         showResponse = v.findViewById<TextView>(R.id.dispResponse)
         showPredictedCrop = v.findViewById<TextView>(R.id.PredictedCropName)
+        predictData = v.findViewById<Button>(R.id.btn_prepopulateData)
+        val clearData: Button = v.findViewById(R.id.clearData)
+
+        var otherValues = v.findViewById(R.id.otherValues) as TextView
+        otherValues.movementMethod = ScrollingMovementMethod()
+
+        val queue = Volley.newRequestQueue(requireContext())
+        val url = "http://blynk-cloud.com/eXpqtX-9hyztgT-hSy2Modfq9agCaod9/get/V8"
+
+        predictData.setOnClickListener{
+            val stringRequest = StringRequest(
+                Request.Method.GET, url,
+                Response.Listener<String> { response ->
+                    var a: List<String> = response.replace("[", "").replace("]", "").replace("\"", "").split(",")
+                    var r: String = "Test for Light Availability\n:RED: " + a[0] + ""
+                    var g: String = ";GREEN: " + a[1] + ""
+                    var b: String = ";BLUE:" +a[2] + "\n"
+                    var ph: String = "PH:" + a[3] + "\n"
+                    var temp: String = "TEMPERATURE:" + a[4] + "\n"
+                    var humid: String = "HUMIDITY:" + a[5] + "\n"
+                    var moisture: String = "MOISTURE:" + a[6] + "\n"
+                    var salinity: String = "SALINITY:" + a[7]
+                    val otherData = v.findViewById<TextView>(R.id.otherValues)
+                    otherData.text = r+g+b+ph+temp+humid+moisture+salinity
+
+                    obtainedPhValue = a[3].toString().toFloat()
+                    var edTxt_phValue = v.findViewById(R.id.edTxt_ph) as EditText
+                    edTxt_phValue.text = Editable.Factory.getInstance().newEditable(obtainedPhValue.toString())
+                    obtainedECValue = a[7].toString().toFloat()
+                    var edTxt_ecValue = v.findViewById(R.id.edTxt_ec) as EditText
+                    edTxt_ecValue.text = Editable.Factory.getInstance().newEditable(obtainedECValue.toString())
+                },
+                Response.ErrorListener {   })
+            queue.add(stringRequest)
+        }
+
+        clearData.setOnClickListener{
+            var edTxt_nValue = v.findViewById(R.id.edTxt_n) as EditText
+            var edTxt_pValue = v.findViewById(R.id.edTxt_p) as EditText
+            var edTxt_kValue = v.findViewById(R.id.edTxt_k) as EditText
+            var edTxt_phValue = v.findViewById(R.id.edTxt_ph) as EditText
+            var edTxt_ecValue = v.findViewById(R.id.edTxt_ec) as EditText
+            var edTxt_sValue = v.findViewById(R.id.edTxt_s) as EditText
+            var edTxt_cuValue = v.findViewById(R.id.edTxt_cu) as EditText
+            var edTxt_feValue = v.findViewById(R.id.edTxt_fe) as EditText
+            var edTxt_mnValue = v.findViewById(R.id.edTxt_mn) as EditText
+            var edTxt_znValue = v.findViewById(R.id.edTxt_zn) as EditText
+            var edTxt_bValue = v.findViewById(R.id.edTxt_b) as EditText
+
+            edTxt_nValue.text = null
+            edTxt_pValue.text = null
+            edTxt_kValue.text = null
+            edTxt_phValue.text = null
+            edTxt_ecValue.text = null
+            edTxt_sValue.text = null
+            edTxt_cuValue.text = null
+            edTxt_feValue.text = null
+            edTxt_mnValue.text = null
+            edTxt_znValue.text = null
+            edTxt_bValue.text = null
+            showResponse.text = null
+            showPredictedCrop.text = null
+            otherValues.text = null
+
+        }
+
         return v
     }
 

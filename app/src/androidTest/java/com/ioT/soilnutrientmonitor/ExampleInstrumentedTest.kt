@@ -1,4 +1,4 @@
-package com.example.soilnutrientmonitor
+package com.ioT.soilnutrientmonitor
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

@@ -1,4 +1,4 @@
-package com.example.soilnutrientmonitor
+package com.ioT.soilnutrientmonitor
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -6,18 +6,16 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
-import com.android.volley.Request
-import com.android.volley.Response
-import com.android.volley.toolbox.StringRequest
-import com.android.volley.toolbox.Volley
 import com.chaquo.python.Python
 import com.chaquo.python.android.AndroidPlatform
-import com.example.soilnutrientmonitor.fragments.AboutFragment
-import com.example.soilnutrientmonitor.fragments.ContinousSoilData
-import com.example.soilnutrientmonitor.fragments.PredictFragment
-import com.example.soilnutrientmonitor.fragments.adapters.ViewPagerAdapter
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.common.api.ApiException
+import com.ioT.soilnutrientmonitor.fragments.AboutFragment
+import com.ioT.soilnutrientmonitor.fragments.ContinousSoilData
+import com.ioT.soilnutrientmonitor.fragments.PredictFragment
+import com.ioT.soilnutrientmonitor.fragments.adapters.ViewPagerAdapter
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.ktx.Firebase
+import com.google.firebase.auth.GoogleAuthProvider
 
 class HomeActivity : AppCompatActivity() {
 
@@ -30,7 +28,6 @@ class HomeActivity : AppCompatActivity() {
             Python.start(AndroidPlatform(this))
         }
         setupTabs()
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -47,9 +44,12 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun signOut(){
+        firebaseAuth = FirebaseAuth.getInstance()
+        if(firebaseAuth.currentUser != null){
             firebaseAuth.signOut()
             startActivity(Intent(this@HomeActivity, MainActivity::class.java))
             finish()
+        }
     }
 
     private fun setupTabs(){

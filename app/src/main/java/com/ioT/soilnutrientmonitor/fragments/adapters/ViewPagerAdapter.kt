@@ -1,4 +1,4 @@
-package com.example.soilnutrientmonitor.fragments.adapters
+package com.ioT.soilnutrientmonitor.fragments.adapters
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

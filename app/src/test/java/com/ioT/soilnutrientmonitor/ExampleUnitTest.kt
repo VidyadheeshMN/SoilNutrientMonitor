@@ -1,4 +1,4 @@
-package com.example.soilnutrientmonitor
+package com.ioT.soilnutrientmonitor
 
 import org.junit.Test
 

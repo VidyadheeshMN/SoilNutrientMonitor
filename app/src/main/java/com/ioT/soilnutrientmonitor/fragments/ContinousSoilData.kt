@@ -1,7 +1,5 @@
-package com.example.soilnutrientmonitor.fragments
+package com.ioT.soilnutrientmonitor.fragments
 
-import android.app.Activity
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,11 +11,9 @@ import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import com.example.soilnutrientmonitor.R
+import com.ioT.soilnutrientmonitor.R
 
 class ContinousSoilData : Fragment() {
-
-    //private lateinit var myContext: Context
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,9 +38,9 @@ class ContinousSoilData : Fragment() {
                 Request.Method.GET, url,
                 Response.Listener<String> { response ->
                     var a: List<String> = response.replace("[", "").replace("]", "").replace("\"", "").split(",")
-                    var r: String = "RED:" + a[0] + "\n"
-                    var g: String = "GREEN:" + a[1] + "\n"
-                    var b: String = "BLUE:" +a[2] + "\n"
+                    var r: String = "Test for Light Availability\n:RED: " + a[0] + ""
+                    var g: String = ";GREEN: " + a[1] + ""
+                    var b: String = ";BLUE:" +a[2] + "\n"
                     var ph: String = "PH:" + a[3] + "\n"
                     var temp: String = "TEMPERATURE:" + a[4] + "\n"
                     var humid: String = "HUMIDITY:" + a[5] + "\n"
