@@ -38,9 +38,9 @@ class ContinousSoilData : Fragment() {
                 Request.Method.GET, url,
                 Response.Listener<String> { response ->
                     var a: List<String> = response.replace("[", "").replace("]", "").replace("\"", "").split(",")
-                    var r: String = "Test for Light Availability\n:RED: " + a[0] + ""
-                    var g: String = ";GREEN: " + a[1] + ""
-                    var b: String = ";BLUE:" +a[2] + "\n"
+                    var r: String = "Test for Light Availability:\nRED: " + a[0] + "\n"
+                    var g: String = "GREEN: " + a[1] + "\n"
+                    var b: String = "BLUE:" +a[2] + "\n\n"
                     var ph: String = "PH:" + a[3] + "\n"
                     var temp: String = "TEMPERATURE:" + a[4] + "\n"
                     var humid: String = "HUMIDITY:" + a[5] + "\n"

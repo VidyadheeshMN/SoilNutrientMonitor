@@ -6,21 +6,26 @@
     tools:context=".fragments.AboutFragment">
 
     <TextView
+        android:id="@+id/aboutHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="false"
-        android:textSize="28dp"
-        android:textFontWeight="700"
+        android:textColor="@color/white"
+        android:textSize="32dp"
+        android:textStyle="bold"
         android:layout_centerHorizontal="true"
         android:text="About this app" />
 
     <TextView
         android:id="@+id/paragraph"
+        android:layout_below="@+id/aboutHeader"
         android:textStyle="bold"
+        android:textColor="@color/black"
+        android:justificationMode="inter_word"
+        android:layout_margin="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="23dp"
-        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

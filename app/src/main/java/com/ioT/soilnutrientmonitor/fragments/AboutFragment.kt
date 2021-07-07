@@ -25,7 +25,7 @@ class AboutFragment : Fragment() {
                 "grown based on the nutrient values present in their land" +
                 "The nutrient values that are considered for the prediction are" +
                 "Nitrogen, Phosphorous, Potassium, PH, Electrical Conductivity, " +
-                "Sulphur, Copper, Iron, Manganese, Zinc and Boron"
+                "Sulphur, Copper, Iron, Manganese, Zinc and Boron."
         return v
     }
 }
