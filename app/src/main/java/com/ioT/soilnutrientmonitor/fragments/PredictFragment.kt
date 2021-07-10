@@ -29,7 +29,6 @@ class PredictFragment : Fragment() {
     var cuValue:Float = (-1).toFloat(); var feValue:Float = (-1).toFloat(); var mnValue:Float = (-1).toFloat()
     var znValue:Float = (-1).toFloat(); var bValue:Float = (-1).toFloat(); lateinit var showResponse: TextView;
     var obtainedPhValue: Float = (-1).toFloat()
-    var obtainedECValue: Float = (-1).toFloat()
     lateinit var showPredictedCrop: TextView
     lateinit var predictData: Button
 
@@ -76,9 +75,6 @@ class PredictFragment : Fragment() {
                     obtainedPhValue = a[3].toString().toFloat()
                     var edTxt_phValue = v.findViewById(R.id.edTxt_ph) as EditText
                     edTxt_phValue.text = Editable.Factory.getInstance().newEditable(obtainedPhValue.toString())
-                    obtainedECValue = a[7].toString().toFloat()
-                    var edTxt_ecValue = v.findViewById(R.id.edTxt_ec) as EditText
-                    edTxt_ecValue.text = Editable.Factory.getInstance().newEditable(obtainedECValue.toString())
                 },
                 Response.ErrorListener {   })
             queue.add(stringRequest)

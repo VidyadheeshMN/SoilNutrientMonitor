@@ -55,8 +55,8 @@ class HomeActivity : AppCompatActivity() {
     private fun setupTabs(){
         val adapter = ViewPagerAdapter(supportFragmentManager)
         adapter.addFragment(PredictFragment(), "Predict")
-        adapter.addFragment(AboutFragment(), "About")
         adapter.addFragment(ContinousSoilData(), "Soil Data")
+        adapter.addFragment(AboutFragment(), "About")
         val viewPager = findViewById<androidx.viewpager.widget.ViewPager>(R.id.viewPager)
         val tabs = findViewById<com.google.android.material.tabs.TabLayout>(R.id.tabs)
         viewPager.adapter = adapter

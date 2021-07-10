@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.ContinousSoilData">
 
     <Button
@@ -19,10 +20,102 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:textStyle="bold"
-        android:textSize="20dp"
+        android:textSize="17dp"
         android:text="you will see the soil data here"
         android:layout_below="@+id/FetchData" />
 
+    <GridLayout android:id="@+id/GridLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:columnCount="2"
+        android:rowCount="2"
+        android:layout_below="@+id/ViewSoilData">
 
+        <LinearLayout
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical">
+
+            <com.mikhaellopez.circularprogressbar.CircularProgressBar
+                android:id="@+id/temperatureProgressBar"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:visibility="invisible"
+                app:cpb_background_progressbar_width="20dp"
+                app:cpb_progress_direction="to_right"
+                app:cpb_progressbar_color="#3f51b5"
+                app:cpb_progressbar_width="10dp"
+                app:cpb_round_border="true" />
+
+            <TextView
+                android:id="@+id/tempText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_row="0"
+            android:layout_column="1"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical">
+
+            <com.mikhaellopez.circularprogressbar.CircularProgressBar
+                android:id="@+id/humidityProgressBar"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                app:cpb_background_progressbar_width="20dp"
+                app:cpb_progress_direction="to_right"
+                android:visibility="invisible"
+                app:cpb_progressbar_color="#3f51b5"
+                app:cpb_progressbar_width="10dp"
+                app:cpb_round_border="true" />
+
+            <TextView
+                android:id="@+id/humidityText"
+                android:visibility="invisible"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_column="0"
+            android:layout_marginTop="8dp"
+            android:layout_row="1"
+            android:layout_columnSpan="2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.mikhaellopez.circularprogressbar.CircularProgressBar
+                android:id="@+id/phProgressBar"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                app:cpb_background_progressbar_width="20dp"
+                android:layout_gravity="center"
+                app:cpb_progress_direction="to_right"
+                android:visibility="invisible"
+                app:cpb_progressbar_color="#3f51b5"
+                app:cpb_progressbar_width="10dp"
+                app:cpb_round_border="true" />
+
+            <TextView android:id="@+id/phText"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="invisible" />
+
+        </LinearLayout>
+    </GridLayout>
 
 </RelativeLayout>
