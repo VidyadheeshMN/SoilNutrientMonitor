@@ -67,8 +67,8 @@ class PredictFragment : Fragment() {
                     var moisture: String = "MOISTURE:" + a[6] + "\n"
                     var salinity: String = "SALINITY:" + a[7]
 
-                    //obtainedPhValue = a[3].toString().toFloat()
-                    obtainedPhValue = 6.4f
+                    obtainedPhValue = a[3].toFloat()
+                    //obtainedPhValue = 6.4f
                     var edTxt_phValue = v.findViewById(R.id.edTxt_ph) as EditText
                     edTxt_phValue.text = Editable.Factory.getInstance().newEditable(obtainedPhValue.toString())
                 },
@@ -89,6 +89,7 @@ class PredictFragment : Fragment() {
             var edTxt_znValue = v.findViewById(R.id.edTxt_zn) as EditText
             var edTxt_bValue = v.findViewById(R.id.edTxt_b) as EditText
 
+            v.findViewById<TextView>(R.id.CropName).text = null
             edTxt_nValue.text = null
             edTxt_pValue.text = null
             edTxt_kValue.text = null

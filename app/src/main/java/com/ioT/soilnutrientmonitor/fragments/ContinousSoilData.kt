@@ -47,10 +47,10 @@ class ContinousSoilData : Fragment() {
                     var r: String = "Test for Light Availability:\nRED: " + resp[0] + "\n"
                     var g: String = "GREEN: " + resp[1] + "\n"
                     var b: String = "BLUE:" +resp[2] + "\n\n"
-                    var ph: String = "PH:" + "6.4" + "\n"
+                    var ph: String = "PH:" + resp[3] + "\n"
                     var temp = "TEMPERATURE:" + resp[4] + "\n"
                     var humid: String = "HUMIDITY:" + resp[5] + "\n"
-                    var moisture: String = "MOISTURE:" + if (resp[6] == "0") "NORMAL" else "HIGH" + "\n"
+                    var moisture: String = "MOISTURE:" + if (resp[6] == "0") "NORMALl" else "HIGH" + "\n"
                     var salinity: String = "SALINITY:" + if (resp[7] == "0") "NORMAL" else "HIGH"
                     dataText.text = r+g+b+ph+temp+humid+moisture+salinity
 
@@ -120,7 +120,8 @@ class ContinousSoilData : Fragment() {
                     val phProgressBar = v.findViewById<CircularProgressBar>(R.id.phProgressBar)
                     phProgressBar.apply {
                         // set progress with animation
-                        setProgressWithAnimation(6.4f, 600)
+                        //setProgressWithAnimation(6.4f, 600)
+                        setProgressWithAnimation(resp[3].toFloat(), 600)
 
                         // Set Progress Max
                         progressMax = 14f
@@ -145,13 +146,13 @@ class ContinousSoilData : Fragment() {
                         phProgressBar.visibility = View.VISIBLE
                         var ph = v.findViewById<TextView>(R.id.phText)
                         ph.visibility = View.VISIBLE
-                        //ph.text = "PH: ${resp[3]}/14"
-                        ph.text = "PH: 6.4/14"
+                        ph.text = "PH: ${resp[3]}/14"
+                        //ph.text = "PH: 6.4/14"
                     }
-            },
-            { dataText.text = "response error" })
+                },
+                { dataText.text = "response error" })
 
-        queue.add(stringRequest)
+            queue.add(stringRequest)
         }
         return v
     }
