@@ -50,9 +50,6 @@ class PredictFragment : Fragment() {
         predictData = v.findViewById<Button>(R.id.btn_prepopulateData)
         val clearData: Button = v.findViewById(R.id.clearData)
 
-        var otherValues = v.findViewById(R.id.otherValues) as TextView
-        otherValues.movementMethod = ScrollingMovementMethod()
-
         val queue = Volley.newRequestQueue(requireContext())
         val url = "http://blynk-cloud.com/eXpqtX-9hyztgT-hSy2Modfq9agCaod9/get/V8"
 
@@ -69,14 +66,13 @@ class PredictFragment : Fragment() {
                     var humid: String = "HUMIDITY:" + a[5] + "\n"
                     var moisture: String = "MOISTURE:" + a[6] + "\n"
                     var salinity: String = "SALINITY:" + a[7]
-                    val otherData = v.findViewById<TextView>(R.id.otherValues)
-                    otherData.text = r+g+b+ph+temp+humid+moisture+salinity
 
-                    obtainedPhValue = a[3].toString().toFloat()
+                    //obtainedPhValue = a[3].toString().toFloat()
+                    obtainedPhValue = 6.4f
                     var edTxt_phValue = v.findViewById(R.id.edTxt_ph) as EditText
                     edTxt_phValue.text = Editable.Factory.getInstance().newEditable(obtainedPhValue.toString())
                 },
-                Response.ErrorListener {   })
+                Response.ErrorListener {  })
             queue.add(stringRequest)
         }
 
@@ -106,8 +102,6 @@ class PredictFragment : Fragment() {
             edTxt_bValue.text = null
             showResponse.text = null
             showPredictedCrop.text = null
-            otherValues.text = null
-
         }
 
         return v
@@ -160,7 +154,8 @@ class PredictFragment : Fragment() {
             val predictedCrop = pythonFile.callAttr("predictCrop", nValue, pValue, kValue, phValue,
                 ecValue, sValue, cuValue, feValue, mnValue, znValue, bValue)
             Log.d("outputPY: ", predictedCrop.toString())
-            showPredictedCrop.text = "Predicted Crop is $predictedCrop"
+            showPredictedCrop.text = "Predicted Crop is\n"
+            v.findViewById<TextView>(R.id.CropName).text = predictedCrop.toString().replaceFirstChar { it.uppercase() }
             ConvertDataToJSON(nValue, pValue, kValue, phValue,
                 ecValue, sValue, cuValue, feValue, mnValue, znValue, bValue)
         }
